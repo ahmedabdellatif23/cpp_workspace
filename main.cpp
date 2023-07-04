@@ -1,10 +1,11 @@
 #include <iostream>
+#include "header_file.h"
 
 using namespace std;
 
 int main () {
 	cout << "ciao ahmed" << endl;
-    int x = 0;
+    int x = TMP;
     
 	return 0; 
 }
