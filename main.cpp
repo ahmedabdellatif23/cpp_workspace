@@ -4,8 +4,9 @@
 using namespace std;
 
 int main () {
-	cout << "ciao ahmed" << endl;
-    int x = TMP;
-    
+	int num;
+	std::cout << "number :" ;
+	std::cin >> num;
+	std::cout << " COOL " << std::endl;  
 	return 0; 
 }
