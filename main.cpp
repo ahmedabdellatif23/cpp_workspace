@@ -1,22 +1,10 @@
-// Accessing class members 
+// Class member access modifiers
 
 /*
-if you have an object using dot operator
-refObject.refAttribute
-refObject.refMethod(pass the argument)
+public
 
-if you have a pointer to the object 
-dereference the pointer then use dot operator 
-or use the arrow operator
-Note : parenthesis is a must 
-
-(*refObject).refAttribute 
-refObject->refAttribute 
-
-(*refObject).refMethod(pass the argument)
-refObject->refMethod(pass the argument)
-
-same as in C for structures and unions 
+private : if you try to access private memebrs you get complier error
+private is accessible within a class or by its friends
 */
 
 #include <iostream>
@@ -28,11 +16,12 @@ using namespace std;
 
 // Minimal player class 
 class Player {
-public:
+private:
 	// attributes : to be initialized using constructors 
-	string name;
+	string name {"Ahmed"};
 	int health;
 	int xp;
+public:
 	// methods
 	void talk(string textToSay) {cout << name << " says " << textToSay << endl;}  // functions prototypes 
 	bool is_dead();		
@@ -55,41 +44,7 @@ public:
 
 
 int main () {
-	Player ahmed;	// instaces 
-	
-	Account ahmedAccount;
-
-
-	// accessing attributes of the class 
-	ahmed.name = "ahmed";
-	ahmed.health = 200;
-	ahmed.xp = 12;
-	ahmed.talk("ciao dude");
-
-	ahmedAccount.name = "Ahmed's Account";
-	ahmedAccount.balance = 200;
-	ahmedAccount.deposit(100);
-	ahmedAccount.withdraw(22);
-
-
-	// create objects on the heap 
-
-	Player *enemy {nullptr};
-	enemy = new Player;
-
-	enemy->name = "none";
-	enemy->health = 200;
-	(*enemy).xp = 11;
-	enemy->talk("dude i will kill you !");
-	delete enemy;
-
-
-	Account *imeneAccount {nullptr};
-	imeneAccount = new Account;
-	imeneAccount->balance = 200;
-	imeneAccount->name = "imene account";
-	imeneAccount->deposit(233);
-	imeneAccount->withdraw(110);
-
+	Player ahmed;
+	ahmed.talk("hello");
 	return 0; 
 }
