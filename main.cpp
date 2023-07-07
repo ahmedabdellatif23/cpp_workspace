@@ -13,7 +13,7 @@
 
 using namespace std;
 
-class Shallow
+class Deep
 {
 private:
 	int *data;
@@ -22,45 +22,41 @@ public:
 	void set_data_value(int d) { *data = d; }
 	int get_data_value() { return *data; }
 	/* overloaded contructors */
-	Shallow(int d);
+	Deep(int d);
 	/* copy constructor */
-	Shallow(const Shallow &source);
+	Deep(const Deep &source);
 	/* destructor */
-	~Shallow();
+	~Deep();
 };
 
-Shallow::Shallow(int d)
+Deep::Deep(int d)
 {
-	data = new int;
+	data = new int; // allocate storage for an int
 	*data = d;
 }
-/* implementation of copy constructor */
-Shallow::Shallow(const Shallow &source) : data(source.data)
+/* implementation of copy constructor : changes here to overcome shallow  */
+Deep::Deep(const Deep &source) : Deep {*source.data}
 {
-	cout << "shallow copy" << endl;
+	/* Create a new storage and copy values */
+	// data = new int; // allocate memory for int
+	// *data = *source.data;
+	// cout << "deep copy" << endl;
 }
-Shallow::~Shallow()
+Deep::~Deep()
 {
 	delete data;
 	cout << "free data" << endl;
 }
 
-void dispaly_shallow(Shallow s)
-{
+void display_deep(Deep s) {
 	cout << s.get_data_value() << endl;
 }
 
 int main()
 {
-	Shallow obj1 {100};
-	dispaly_shallow(obj1);
-	
-	Shallow obj2 {obj1};
-	obj2.set_data_value(200);
-	dispaly_shallow(obj2);
-
-	
-
-
+	Deep obj1{100};
+	display_deep(obj1);
+	Deep obj2{obj1};
+	obj2.set_data_value(240);
 	return 0;
 }
