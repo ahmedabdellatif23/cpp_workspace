@@ -1,8 +1,7 @@
-// Constructor initialization lists
+// Delegating constructor
 
 /*
-	initialization list immediately follows the parameters list
-	initializes the data members as the object is created
+
 */
 
 #include <iostream>
@@ -25,41 +24,23 @@ public:
 	Player(std::string name_val);
 	Player(std::string name_val, int health_val, int xp_val);
 };
-// /* Assignment not initialization */
-// Player::Player(/* args */)
-// {
-// 	name = "None";
-// 	health = 0;
-// 	xp = 0;
-// }
 
-// Player::Player(std::string name_val)
-// {
-// 	name = name_val;
-// 	health = 0;
-// 	xp = 0;
-// }
-
-// Player::Player(std::string name_val, int health_val, int xp_val)
-// {
-// 	name = name_val;
-// 	health = health_val;
-// 	xp = xp_val;
-// }
-
-/* Better way using initializtion list */
+/* Delegating constructors */
 Player::Player()
-	: name{"None"}, health{0}, xp{0}
+	: Player{"None", 0, 0} // uses three arg constructor init list defined below
 {
+	cout << "no arg constructor " << endl;
 }
 
 Player::Player(std::string name_val)
-	: name{name_val}, health{0}, xp{0}
+	: Player{name_val, 0, 0}
 {
+	cout << "one arg constructor " << endl;
 }
 Player::Player(std::string name_val, int health_val, int xp_val)
 	: name{name_val}, health{health_val}, xp{xp_val}
 {
+	cout << "three arg constructor " << endl;
 }
 
 int main()
