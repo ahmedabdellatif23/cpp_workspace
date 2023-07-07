@@ -1,8 +1,8 @@
-// Separating specification from implementation
+// Constructor initialization lists
 
 /*
-	Methods are implemented in cpp file but it is declared in .h
-	either using include guards or #pragma once
+	initialization list immediately follows the parameters list
+	initializes the data members as the object is created 
 */
 
 #include <iostream>
@@ -12,18 +12,50 @@
 
 using namespace std;
 
-void Account::set_balance(double bal) {
-	balance = bal;
+class Player
+{
+private:
+	std::string name;
+	int health;
+	int xp;
+
+public:
+// overloaded constructors
+	Player(/* args */);
+	Player(std::string name_val);
+	Player(std::string name_val, int health_val, int xp_val);
+};
+/* Assignment not initialization */
+Player::Player(/* args */)
+{
+	name = "None";
+	health = 0;
+	xp = 0;
 }
 
-double Account::get_balance() {
-	return balance;
+Player::Player(std::string name_val)
+{
+	name = name_val;
+	health = 0;
+	xp = 0;
 }
+
+Player::Player(std::string name_val, int health_val, int xp_val)
+{
+	name = name_val;
+	health = health_val;
+	xp = xp_val;
+}
+
+// /* Better way */
+// Player::Player()
+// 	: name{"None"}, health{0}, xp{0}
+
 
 
 int main () {
-	Account ahmedAccount;
-	ahmedAccount.set_balance(100);
-
+	Player empty;
+	Player zaz{"zaz"};
+	Player ahmed{"ahmed",100,20};
 	return 0; 
 }
