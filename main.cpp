@@ -1,16 +1,9 @@
-// copy constructor
+// Shallow copy
 
 /*
-	when objects are copied c++ must create a new object from an existing object
-	a copy is made when passing object by value as a parameter
-	returning an object from a function by value
-	constructing one object based on another of the same class
-
-	Best practices
-	provide copy constructor when your class has raw pointer members
-	provide the copy constructor with const reference parameters
-	use STL classes as they already provide copy constructor
-	avoid using raw pointer data members if possible
+	when we have a raw pointer as a class member,
+	shollow copy - only the pointer is copied not what it points to
+	problem : source and the newly created object both point to the same data area!
 */
 
 #include <iostream>
@@ -20,51 +13,54 @@
 
 using namespace std;
 
-class Player
+class Shallow
 {
 private:
-	std::string name;
-	int health;
-	int xp;
+	int *data;
 
 public:
-	std::string get_name() { return name; }
-	int get_health() { return health; }
-	int get_xp() { return xp; }
-
-	// overloaded constructors
-	Player(std::string name_val = "None", int health_val = 0, int xp_val= 0);
-	// prototype for copy constructor
-	Player(const Player &source);
-	// destructor
-	~Player() { cout << "destructor is being called for : " << name << endl; }
+	void set_data_value(int d) { *data = d; }
+	int get_data_value() { return *data; }
+	/* overloaded contructors */
+	Shallow(int d);
+	/* copy constructor */
+	Shallow(const Shallow &source);
+	/* destructor */
+	~Shallow();
 };
 
-Player::Player(std::string name_val, int health_val, int xp_val)
-	: name{name_val}, health{health_val}, xp{xp_val}
+Shallow::Shallow(int d)
 {
-	cout << "three arg constructor for  " + name << endl;
+	data = new int;
+	*data = d;
+}
+/* implementation of copy constructor */
+Shallow::Shallow(const Shallow &source) : data(source.data)
+{
+	cout << "shallow copy" << endl;
+}
+Shallow::~Shallow()
+{
+	delete data;
+	cout << "free data" << endl;
 }
 
-// implmenting copy constructor
-Player::Player(const Player &source)
-	: name(source.name), health(source.health), xp(source.xp)
+void dispaly_shallow(Shallow s)
 {
-	cout << "copy constructor - made copy of: " << source.name << endl;
+	cout << s.get_data_value() << endl;
 }
 
-void display_player(Player p){
-	cout << "name: " << p.get_name() << endl;
-	cout << "health: " << p.get_health() << endl;
-	cout << "xp: " << p.get_xp() << endl;
-}
 int main()
 {
-	Player empty;
-	display_player(empty);
-	Player zaz{"zaz"};
-	display_player(zaz);
-	Player ahmed{"ahmed", 100, 20};
-	display_player(ahmed);
+	Shallow obj1 {100};
+	dispaly_shallow(obj1);
+	
+	Shallow obj2 {obj1};
+	obj2.set_data_value(200);
+	dispaly_shallow(obj2);
+
+	
+
+
 	return 0;
 }
