@@ -1,28 +1,10 @@
-// Move constructor
+// this pointer
 
 /*
-	sometimes when we execute code the compiler creates unnamed temp values
-	As copy constructors doing deep copying can have significant performance bottleneck
-	Move constructor moves an object rather than copy it, uses r-values reference operator (&&)
-	optional but not recommended
-
-	 int x {100}
-	 void func(int &num)  func that expects an l value ref
-	 func(x) ok ! since x is an lvalue
-	 func(200); nok ! since 200 is an r-value
-
-	 however
-	 void func(int &&num) func that expects an r value ref
-	 func(200) ok !
-	 func(x) nok !
-
-	instead of making a deep copy of the move constructor
-	'moves' the resources
-	simply copies the address of the resources from source to current object
-	and nulls out the pointer in the source pointer
-
-	syntax -r-value reference
-	Type::Type(Type &&source)     no const qualifier for source, par is r-value ref.
+	contains the address of the object
+	can be used by the programmer to access data member and methods
+	to determine if two objects are the same
+	can be derefernced (*this) to yield the current object
 */
 
 #include <iostream>
@@ -32,61 +14,36 @@
 
 using namespace std;
 
-class Move
+class Account
 {
 private:
-	int *data; // raw pointer
+	int balance;
+
 public:
-	void set_data_value(int d) { *data = d; }
-	int get_data_value() { return *data; }
-	Move(int d);			  // constructor
-	// Move(const Move &source); // copy constructor
-	Move(Move &&source);	  // move constructor
-	~Move();				  // destructor
+	void set_balance(double balance);
+	void compare(const Account &other);
+	Account(/* args */);
+	~Account();
 };
 
-Move::Move(int d)
+Account::Account(/* args */)
 {
-	data = new int; // allocate storage
-	*data = d;		// copy data
-	cout << "constructor for: " << d << endl;
 }
 
-// Move::Move(const Move &source)
-// 	: Move{*source.data}
-// {
-
-// 	cout << "copy constructor is being called: " << *data << endl;
-// }
-
-Move::Move(Move &&source)
-	: data{source.data}
-{ // not a deep copy
-	/* steal the data then null out the source pointer */
-	source.data = nullptr;
-	cout << "move constructor is being called: " << *data << endl;
-}
-
-Move::~Move()
+void Account::set_balance(double balance)
 {
-	if (data != nullptr)
-	{
-		cout << "destructor is being called : " << *data << endl;
-	}
-	else
-	{
-		cout << "destructor is being called for nullptr " << endl;
-	}
-	delete data;
+	this->balance = balance;  // here you must use this 
+}
+void Account::compare(const Account &other) {
+	if(this == &other) 
+	std:cout << "the same object" << std::endl;
+}
+Account::~Account()
+{
 }
 
 int main()
 {
-	vector<Move> vec;
-	vec.push_back(Move{10});
-	vec.push_back(Move{30});
-	vec.push_back(Move{34});
-	vec.push_back(Move{3330});
-	vec.push_back(Move{301});
+
 	return 0;
 }
