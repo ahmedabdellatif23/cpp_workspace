@@ -1,10 +1,11 @@
-// this pointer
+// Static class members
 
 /*
-	contains the address of the object
-	can be used by the programmer to access data member and methods
-	to determine if two objects are the same
-	can be derefernced (*this) to yield the current object
+	Class data members can be declared as static
+	single data member that belongs to the class not the objects
+	useful to store class wide information
+
+	Static functions have access to ONLY static variables
 */
 
 #include <iostream>
@@ -13,33 +14,21 @@
 #include "header_file.h"
 
 using namespace std;
+/* static variables must be initialized */
 
-class Account
-{
-private:
-	int balance;
-
-public:
-	void set_balance(double balance);
-	void compare(const Account &other);
-	Account(/* args */);
-	~Account();
-};
-
-Account::Account(/* args */)
+int Player::num_players {0}; 
+/* implements the constructor */
+Player::Player(std::string name_val, int health_val, int xp_val)
+	: name{name_val}, health{health_val}, xp{xp_val}
 {
 }
 
-void Account::set_balance(double balance)
+Player::~Player()
 {
-	this->balance = balance;  // here you must use this 
 }
-void Account::compare(const Account &other) {
-	if(this == &other) 
-	std:cout << "the same object" << std::endl;
-}
-Account::~Account()
-{
+
+int Player::get_num_players() {
+	return num_players;
 }
 
 int main()
