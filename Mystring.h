@@ -12,8 +12,11 @@ public:
     Mystring(const char *s);          // overloaded constructor
     Mystring(const Mystring &source); // copy constructor
     ~Mystring();                      // destructor
+    Mystring(Mystring &&source);      // move constructor arg ref to r values
+
 
     Mystring &operator=(const Mystring &rhs);  // copy assignment
+    Mystring &operator=(Mystring &&rhs);       // move assignment     
 
     void display() const;             
     int get_length() const;             //getters
