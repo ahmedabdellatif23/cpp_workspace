@@ -10,9 +10,10 @@ private:
     std::string name;
     int health;
     int xp;
-
+    friend void display_player(Player &p); // friend function 
 public:
-    std::string get_name() { return name; }
+    std::string
+    get_name() { return name; }
     int get_health() { return health; }
     int get_xp() { return xp; }
 
@@ -23,7 +24,7 @@ public:
     ~Player();
     /* static function */
     static int get_num_players();
-    friend void display_player(Player &p);
+
 };
 
 #endif
