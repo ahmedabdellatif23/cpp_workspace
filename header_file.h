@@ -23,7 +23,7 @@ public:
     ~Player();
     /* static function */
     static int get_num_players();
-    // void display_active_players();
+    friend void display_player(Player &p);
 };
 
 #endif
