@@ -8,6 +8,9 @@ class Mystring
     friend bool operator==(const Mystring &lhs, const Mystring &rhs);
     friend Mystring operator-(const Mystring &obj);
     friend Mystring operator+(const Mystring &lhs, const Mystring &rhs);
+    friend std::ostream &operator<<(std::ostream &outputStream, const Mystring &rhs); //overloaded output stream
+    friend std::istream &operator>>(std::istream &inputStream, Mystring &rhs); //overloaded input stream 
+
 private:
     char *str; // pointer to char buffer that holds c style string
 
