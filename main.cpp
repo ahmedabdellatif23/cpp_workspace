@@ -13,8 +13,18 @@ main()
 	b = "Bonjour";			//overloaded constructor then move assignment
 	a.display();
 	b.display();
-	a = b;					//overloaded constructor then copy assignment
+
+	a = Mystring{"ahmed"};			 
+	b = Mystring{"abdellatif"}; 			
+	cout << (a == b) << endl;
+	b = Mystring{"ahmed"};
+	cout << (a == b) << endl;
+	b = Mystring{"AHMED"};
 	b.display();
-	b = "test";
+	Mystring temp = -b;
+	a.display();
+	b.display();
+	Mystring temp2 = b + "abdellatif";
+	temp2.display();
 	return 0;
 }

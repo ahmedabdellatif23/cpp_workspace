@@ -12,7 +12,7 @@
     move semantics can be more efficient
     if we have raw pointer we should overload the move assignment operator for efficency
 
-    it is very similar to copy assignment except for the fact that we are not deep copying 
+    it is very similar to copy assignment except for the fact that we are not deep copying
     instead we are stealing the pointer then nulling out r h s object
 */
 
@@ -74,14 +74,43 @@ Mystring &Mystring::operator=(const Mystring &rhs)
 Mystring &Mystring::operator=(Mystring &&rhs)
 {
     std::cout << "move assignment " << std::endl;
-    if (this == &rhs)       //self assginment
+    if (this == &rhs) // self assginment
     {
-        return *this;       // return current object
+        return *this; // return current object
     }
-    delete[] str;           // de-allocate current storage
-    str = rhs.str;          // steal the pointer 
-    rhs.str = nullptr;      // null out rhs object
-    return *this;           // return current object
+    delete[] str;      // de-allocate current storage
+    str = rhs.str;     // steal the pointer
+    rhs.str = nullptr; // null out rhs object
+    return *this;      // return current object
+}
+
+// overloading equality operator
+bool Mystring::operator==(const Mystring &rhs) const
+{
+    return (std::strcmp(str, rhs.str) == 0);
+}
+
+// overloading - operator make lowercase
+Mystring Mystring::operator-() const
+{
+    char *buff = new char[std::strlen(str) + 1];
+    std::strcpy(buff, str);
+    for (int i = 0; i < std::strlen(buff); i++)
+    {
+        buff[i] = std::tolower(buff[i]);
+    }
+    Mystring temp{buff};
+    delete [] buff;
+    return temp;
+}
+// concatenate method 
+Mystring Mystring::operator+(const Mystring &rhs) const{
+    char *buff = new char[std::strlen(str) + std::strlen(rhs.str) + 1];
+    std::strcpy(buff,str);
+    std::strcat(buff,rhs.str);
+    Mystring temp{buff};
+    delete [] buff;
+    return temp;
 }
 Mystring::~Mystring()
 {
