@@ -2,18 +2,10 @@
 #include <iostream>
 #include "Mystring.h"
 
-//  overloading assignment operator
+//  overloading  operator as global function
 
 /*
-    Mystring &operator=(const Mystring &rhs);
-    we overload = operator in this case
-    left handside is current object (Mystring)
-    right handside is what we are assigning (Mystring &&rhs) ref to r values
-    move semantics can be more efficient
-    if we have raw pointer we should overload the move assignment operator for efficency
 
-    it is very similar to copy assignment except for the fact that we are not deep copying
-    instead we are stealing the pointer then nulling out r h s object
 */
 
 /* No args constructor */
@@ -84,17 +76,31 @@ Mystring &Mystring::operator=(Mystring &&rhs)
     return *this;      // return current object
 }
 
-// overloading equality operator
-bool Mystring::operator==(const Mystring &rhs) const
-{
-    return (std::strcmp(str, rhs.str) == 0);
-}
 
-// overloading - operator make lowercase
-Mystring Mystring::operator-() const
-{
-    char *buff = new char[std::strlen(str) + 1];
-    std::strcpy(buff, str);
+// overloading equality operator
+// bool Mystring::operator==(const Mystring &rhs) const
+// {
+//     return (std::strcmp(str, rhs.str) == 0);
+// }
+bool operator==(const Mystring &lhs, const Mystring &rhs) {
+    return (std::strcmp(lhs.str, rhs.str) == 0);
+}
+// // overloading - operator make lowercase
+// Mystring Mystring::operator-() const
+// {
+//     char *buff = new char[std::strlen(str) + 1];
+//     std::strcpy(buff, str);
+//     for (int i = 0; i < std::strlen(buff); i++)
+//     {
+//         buff[i] = std::tolower(buff[i]);
+//     }
+//     Mystring temp{buff};
+//     delete [] buff;
+//     return temp;
+// }
+Mystring operator-(const Mystring &obj) {
+    char *buff = new char[std::strlen(obj.str) + 1];
+    std::strcpy(buff, obj.str);
     for (int i = 0; i < std::strlen(buff); i++)
     {
         buff[i] = std::tolower(buff[i]);
@@ -103,10 +109,19 @@ Mystring Mystring::operator-() const
     delete [] buff;
     return temp;
 }
+
 // concatenate method 
-Mystring Mystring::operator+(const Mystring &rhs) const{
-    char *buff = new char[std::strlen(str) + std::strlen(rhs.str) + 1];
-    std::strcpy(buff,str);
+// Mystring Mystring::operator+(const Mystring &rhs) const{
+//     char *buff = new char[std::strlen(str) + std::strlen(rhs.str) + 1];
+//     std::strcpy(buff,str);
+//     std::strcat(buff,rhs.str);
+//     Mystring temp{buff};
+//     delete [] buff;
+//     return temp;
+// }
+Mystring operator+(const Mystring &lhs, const Mystring &rhs) {
+    char *buff = new char[std::strlen(lhs.str) + std::strlen(rhs.str) + 1];
+    std::strcpy(buff,lhs.str);
     std::strcat(buff,rhs.str);
     Mystring temp{buff};
     delete [] buff;

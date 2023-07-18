@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "Mystring.h"
-//  overloading assignment operator
+
 using namespace std;
 
 main()
@@ -26,5 +26,8 @@ main()
 	b.display();
 	Mystring temp2 = b + "abdellatif";
 	temp2.display();
+
+	Mystring stoo = "hello" + temp2;  // NOW is ok with overloaded operator as global functions
+
 	return 0;
 }
