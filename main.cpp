@@ -1,5 +1,5 @@
 /* Section 7 */
-// Vectors 
+// Vector challenge
 #include <iostream>
 #include <vector>
 
@@ -12,32 +12,29 @@ using namespace std;
 
 int main()
 {
-	vector <char> vowels (5);
-	vector <int> test_scores (10);
-	vector <double> hi_temp (300,20.5); // using constructor first element is the size, second element are the values
-
-
-	test_scores.at(1) = 20;
-	test_scores.push_back(70); // adds one more element
-
-	cout << "second element at index 1: " << test_scores.at(1) << endl;
-
-
-	// int movie_rating [3][4] = 
-	// {
-	// 	{ 0, 1, 2, 3},
-	// 	{ 4, 5, 6, 7},
-	// 	{ 8, 9, 10, 11}
-	// };
-
-	// example of using 2D vector
-
-	vector <vector<int>> movie_ratings 
-	{
-		{1,2,3},
-		{4,5,6},
-		{7,8,9}
-	};
-
+	// declare vector 1 and vector 2
+	vector <int> vector1, vector2;
+	cout << "vec size : " << sizeof(vector1) << endl;
+	// add 10 and 20 to vector1 dynamically using push_back
+	vector1.push_back(10);
+	vector1.push_back(20);
+	//dispaly elements in vector 1 using at
+	cout << vector1.at(1) << endl;
+	cout << "vec size : " << sizeof(vector1) << endl;
+	cout << "vec size : " << sizeof(int) << endl;
+	// declare an empty 2d vector called vector_2d
+	vector <vector <int> > vector_2d;
+	// add vector1 to vector_2d dynamically 
+	vector_2d.push_back(vector1);
+	vector_2d.push_back(vector2);
+	// display the elements in vector_2d use .at().at()
+	cout << vector_2d.at(0).at(0) << endl;
+	cout << vector_2d.at(0).at(1) << endl;
+	// change vector1.at(0) to 1000
+	vector1.at(0) = 1000;
+	// display the elements in vector_2d again 
+	cout << vector_2d.at(0).at(0) << endl;
+	// display the elements in vector1
+	cout << vector1.at(0) << endl;
 	return 0;
 }
