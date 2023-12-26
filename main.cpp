@@ -1,5 +1,5 @@
-/* Section 8 */
-// Mixed types expression
+/* Section 9 */
+
 #include <iostream>
 #include <vector>
 
@@ -9,20 +9,10 @@ using namespace std;
 
 int main()
 {
-	int total;
-	int num1, num2, num3;
-	const int count = 3;
+	int num;
+	num = 12;
 
-	cout << "Enter 3 integers : ";
-	cin >> num1 >> num2 >> num3;
-	cout << endl;
+	cout << num << "is " << ((num%2 == 0) ? " even" : " odd") << endl;
 
-	total = num1 + num2 + num3;
-
-	double average;
-
-	average = static_cast<double>(total)/ count;  // useful
-
-	
 	return 0;
 }
