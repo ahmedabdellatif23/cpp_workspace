@@ -3,48 +3,7 @@
 #include <vector>
 #include "Mystring.h"
 #include <memory>
-// Smart pointer
-/*
-	Smart pointers are wrapper classes
-	smart pointers are objects that can only point to heap allocated memory
-	automatically call delete when no longer used
-	ahere to RAII principles
 
-	overloaded operators:
-	dereference *
-	memeber selection ->
-
-	C++ smart pointers
-	unique_ptr   (points to an object of type T on heap, can not be assigned or copied, owns what it points to, )
-	shared_ptr
-	weak_ptr
-
-	example
-
-	{
-		std::smart_pointer<some_class> ptr = .. . .
-		ptr->method;
-		cout << (*ptr) << endl;
-		// ptr will be destroyed when no longer needed
-	}
-
-	RAII design pattern idiom (resource acquisition is initialization)
-	RAII objects are allocated on STACK
-
-	resource acquisition
-		open file
-		allocate memory
-		acquire a lock
-
-	is initialization
-		the resource is acquired in the constructor
-
-	resource relinquishing
-		happens in the destructor
-			close file
-			de-allocate memory
-			release the lock
-*/
 using namespace std;
 
 class Test
